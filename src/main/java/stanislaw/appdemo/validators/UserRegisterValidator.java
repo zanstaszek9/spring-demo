@@ -25,9 +25,14 @@ public class UserRegisterValidator implements Validator {
 
         if (!u.getEmail().equals(null)){
             boolean isMatch = AppdemoUtils.checkEmailOrPassword(AppdemoConstants.EMAIL_PATTERN, u.getEmail());
-            if (!isMatch){
+            if (!isMatch)
                 errors.rejectValue("email", "error.userEmailIsNotMatch");
-            }
+        }
+
+        if (!u.getPassword().equals(null)){
+            boolean isMatch = AppdemoUtils.checkEmailOrPassword(AppdemoConstants.PASSWORD_PATTERN, u.getPassword());
+            if (!isMatch)
+                errors.rejectValue("password", "error.userPasswordIsNotMatch");
         }
 
     }
