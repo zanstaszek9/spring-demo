@@ -2,7 +2,6 @@
 	<tr>
 		<td align="left" width="900">
 			<a href="/"><s:message code="menu.mainPage"/></a>&nbsp;&nbsp;
-			</sec:authorize>
 		</td>
 		<td align="right">
 		<sec:authorize access="hasRole('ANONYMOUS')">

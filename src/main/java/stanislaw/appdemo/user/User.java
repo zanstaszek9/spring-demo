@@ -29,7 +29,7 @@ public class User {
 
     @Column(name = "last_name")
     @NotNull
-    private String lastname;
+    private String lastName;
 
     @Column(name = "active")
     @NotNull
@@ -75,12 +75,12 @@ public class User {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getActive() {

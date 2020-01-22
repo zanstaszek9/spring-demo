@@ -14,7 +14,7 @@
     <title><s:message code="menu.mainPage"/></title>
 </head>
 <body>
-<%@include file="/src/main/webapp/WEB-INF/incl/menu.app" %> <%-- Including Menu code --%>
+<%@include file="/WEB-INF/incl/menu.app" %>
 
 <h1>To jest strona glówna</h1>
 </body>

@@ -10,13 +10,13 @@
 <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title><s:message code="menu.register"/></title>
 </head>
 <body>
-<%@include file="/src/main/webapp/WEB-INF/incl/menu.app" %> <%-- Including Menu code --%>
+<%@include file="/WEB-INF/incl/menu.app" %> <%-- Including Menu code --%>
 <h2><s:message code="menu.register"/></h2>
 
 <p align="center">
@@ -24,7 +24,7 @@
 </p>
 
     <sf:form id="usersForm" action="adduser" modelAttribute="user"
-             enctype="multipart/form-data" method="POST">
+             enctype="multipart/form-data" method="POST"> <%-- Sends attribute to Controller class --%>
 
         <table width="500" border="0" cellpadding="4" cellspacing="1"
                align="center">
