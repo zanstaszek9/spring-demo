@@ -18,10 +18,10 @@ public class UserRegisterValidator implements Validator {
     public void validate(Object obj, Errors errors){
         User u = (User) obj;
 
-        ValidationUtils.rejectIfEmpty(errors, "name", "error,userName.empty");
-        ValidationUtils.rejectIfEmpty(errors, "lastName", "error,userLastName.empty");
-        ValidationUtils.rejectIfEmpty(errors, "email", "error,userEmail.empty");
-        ValidationUtils.rejectIfEmpty(errors, "password", "error,userPassword.empty");
+        ValidationUtils.rejectIfEmpty(errors, "name", "error.userName.empty");
+        ValidationUtils.rejectIfEmpty(errors, "lastName", "error.userLastName.empty");
+        ValidationUtils.rejectIfEmpty(errors, "email", "error.userEmail.empty");
+        ValidationUtils.rejectIfEmpty(errors, "password", "error.userPassword.empty");
 
         if (!u.getEmail().equals(null)){
             boolean isMatch = AppdemoUtils.checkEmailOrPassword(AppdemoConstants.EMAIL_PATTERN, u.getEmail());
