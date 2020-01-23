@@ -38,9 +38,14 @@ public class RegisterController {
         User userExist = userService.findUserByEmail(user.getEmail());
 
         new UserRegisterValidator().validate(user, result);
-
+    /*  Possibly makes error
         if (userExist != null)  // If email exists
             result.rejectValue("email", messageSource.getMessage("error.userEmailExist", null, locale));    // If user exists, 'result' will contain error
+    */
+
+        new UserRegisterValidator().validateEmailExist(userExist, result);
+
+
 
         if (result.hasErrors())
             returnPage = "register";

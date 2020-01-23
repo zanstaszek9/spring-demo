@@ -34,6 +34,11 @@ public class UserRegisterValidator implements Validator {
             if (!isMatch)
                 errors.rejectValue("password", "error.userPasswordIsNotMatch");
         }
-
     }
+
+    public void validateEmailExist(User user, Errors errors){
+        if (user != null)
+            errors.rejectValue("email", "error.userEmailExist");
+    }
+
 }
