@@ -45,6 +45,9 @@ public class User {
     @Transient
     private int nrRole;
 
+    @Transient
+    private String newPassword; // For changing password functionality
+
 
 
     // Setters and Getters
@@ -119,5 +122,13 @@ public class User {
 
     public void setNrRole(int nrRole) {
         this.nrRole = nrRole;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 }

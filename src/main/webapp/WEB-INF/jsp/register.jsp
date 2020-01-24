@@ -16,7 +16,7 @@
     <title><s:message code="menu.register"/></title>
 </head>
 <body>
-<%@include file="/WEB-INF/incl/menu.app" %> <%-- Including Menu code --%>
+<%@include file="../incl/menu.app" %> <%-- Including Menu code --%>
 <h2><s:message code="menu.register"/></h2>
 
 <p align="center">
