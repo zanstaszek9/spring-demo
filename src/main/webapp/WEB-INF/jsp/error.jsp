@@ -13,10 +13,10 @@
     <title><s:message code="error.errorPage"/></title>
 </head>
 <body>
-    <%@include file="../incl/menu.app" %>
+<%@include file="../incl/menu.app" %>
 
-    <img src="/resources/images/errorimage.png">
-    <h2><s:message code="error.defaultErrorMessage"/></h2>
+<img src="/resources/images/errorimage.png">
+<h2><s:message code="error.defaultErrorMessage"/></h2>
 
 </body>
 </html>

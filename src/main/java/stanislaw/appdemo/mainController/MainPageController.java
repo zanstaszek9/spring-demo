@@ -9,10 +9,9 @@ import javax.ws.rs.GET;
 public class MainPageController {
 
     @GET
-    @RequestMapping("/")
+    @RequestMapping(value = {"/", "/index"})
     public String showMainPage(){
         return "index";
-
     }
 
 }
