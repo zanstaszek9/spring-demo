@@ -32,6 +32,16 @@
         <table width="500" border="0" cellpadding="4" cellspacing="1"
                align="center">
 
+            <!-- Added field for typing old password -->
+            <tr>
+                <td width="130" align="right" ><s:message code="passwordChange.oldPassword"/></td>
+                <td width="270" align="left"><sf:password path="oldPassword" size="28" /></td>
+            </tr>
+            <tr>
+                <!-- Added for Old Password Errors handling from Validator -->
+                <td colspan="2" align="center"><font color="red"><sf:errors path="oldPassword"/></font></td>
+            </tr>
+
             <tr>
                 <td width="130" align="right" ><s:message code="passwordChange.newPassword"/></td>
                 <td width="270" align="left"><sf:password path="newPassword" size="28" /></td>

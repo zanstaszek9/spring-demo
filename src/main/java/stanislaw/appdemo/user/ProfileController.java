@@ -55,6 +55,7 @@ public class ProfileController   {
 
         new ChangePasswordValidator().validate(user, result);
         new ChangePasswordValidator().checkPasswords(user.getNewPassword(), result);
+        new ChangePasswordValidator().confirmOldPassword(user.getOldPassword(), userService.getPasswordByEmail(user.getEmail()), result);
 
         if (result.hasErrors())
             returnPage = "editpassword";

@@ -1,5 +1,6 @@
 package stanislaw.appdemo.validators;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -30,6 +31,11 @@ public class ChangePasswordValidator implements Validator {
             if (!isMatch)
                 errors.rejectValue("newPassword", "error.userPasswordIsNotMatch");
         }
+    }
+    // Needed for confirming the typed password matches one in the database
+    public void confirmOldPassword(String oldPassword, String encodedPassword, Errors errors){
+        if(!(new BCryptPasswordEncoder().matches(oldPassword, encodedPassword)))
+            errors.rejectValue("oldPassword", "error.oldPasswordNotMatch");
     }
 
 }

@@ -15,5 +15,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {  // Integ
     @Query("UPDATE User u SET u.password = :newPassword WHERE u.email= :email")
     public void updateUserPassword(@Param("newPassword") String password, @Param("email") String email);
 
+    @Query("SELECT u.password FROM User u WHERE u.email= :email")   // Query for getting hashed password
+    public String getPasswordByEmail(@Param("email") String email);
+
 }
 // Interface will tell Hibernate to create SQL query of: 'SELECT * FROM user WHERE user.email = ?"

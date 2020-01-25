@@ -48,6 +48,8 @@ public class User {
     @Transient
     private String newPassword; // For changing password functionality
 
+    @Transient
+    private String oldPassword; // For changing password functionality. It is required as "path="oldPassword"" from .jsp will look for it
 
 
     // Setters and Getters
@@ -130,5 +132,13 @@ public class User {
 
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 }
