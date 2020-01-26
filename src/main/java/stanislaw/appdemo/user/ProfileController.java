@@ -8,9 +8,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import stanislaw.appdemo.utilities.UserUtilities;
 import stanislaw.appdemo.validators.ChangePasswordValidator;
+import stanislaw.appdemo.validators.EditUserProfileValidator;
 
 
-
+import javax.naming.Binding;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import java.util.Locale;
@@ -22,7 +23,7 @@ public class ProfileController   {
     private UserService userService;
 
     @Autowired
-    MessageSource messageSource;
+    private MessageSource messageSource;
 
     @GET
     @RequestMapping(value = "/profile")
@@ -67,6 +68,35 @@ public class ProfileController   {
 
         return returnPage;
     }
+
+
+    @GET
+    @RequestMapping(value = "/editprofile")
+    public String changeUserData(Model model){
+        String username = UserUtilities.getLoggedUser();
+        User user = userService.findUserByEmail(username);
+        model.addAttribute("user", user);
+        return "editprofile";
+    }
+
+    @POST
+    @RequestMapping(value = "/updateprofile")
+    public String changeUserDataAction(User user, BindingResult result, Model model, Locale locale){
+        String returnPage = null;
+
+        new EditUserProfileValidator().validate(user, result);
+
+        if (result.hasErrors())
+            returnPage = "editprofile";
+        else{
+            userService.updateUserProfile(user.getName(), user.getLastName(), user.getEmail(), user.getId());
+            model.addAttribute("message", messageSource.getMessage("profile.edit.success", null, locale));
+            returnPage = "afteredit";
+        }
+
+        return returnPage;
+    }
+
 
 
 }

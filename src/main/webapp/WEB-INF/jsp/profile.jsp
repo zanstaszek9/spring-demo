@@ -89,6 +89,12 @@
             </td>
         </tr>
 
+        <tr>
+            <td align="center">
+                <input type="button" value="<s:message code="button.profileEdit"/>" onclick="window.location.href='${pageContext.request.contextPath}/editprofile'"/>
+            </td>
+        </tr>
+
     </table>
 
 </body>
