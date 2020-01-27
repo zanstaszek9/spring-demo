@@ -17,9 +17,11 @@
 <body>
 <%@include file="../../incl/menu.app" %>
 <h1><s:message code="menu.users"/></h1>
-
+<c:set var="recordCounter" value="${recordCounterStart}" scope="page"/>
+<div>
 <table width="1000" border="0" cellpadding="6" cellspacing="0">
     <tr>
+        <td width="35" align="center"></td>
         <td width="35" align="center"><s:message code="admin.user.id"/></td>
         <td width="200" align="center"><s:message code="register.name"/></td>
         <td width="200" align="center"><s:message code="register.lastName"/></td>
@@ -27,8 +29,10 @@
         <td width="60" align="center"><s:message code="profile.isActive"/></td>
         <td width="100" align="center"><s:message code="profile.role"/></td>
     </tr>
-    <c:forEach var="u" items="${userList }">
+    <c:forEach var="u" items="${usersList }">
+        <c:set var="recordCounter" value="${recordCounter+1}"/>
     <tr>
+        <td><c:out value="${recordCounter}"/></td>
         <td><c:out value="${u.id }" /></td>
         <td><c:out value="${u.name }" /></td>
         <td><c:out value="${u.lastName }" /></td>
@@ -55,5 +59,27 @@
         </td>
     </tr>
     </c:forEach>
+</table>
+<table width="1000" border="0" cellpadding="6" cellspacing="0">
+    <tr>
+        <td align="left">
+            <s:message code="word.page"/>&nbsp;${currentPageNumber}&#32;<s:message code="word.of"/>&nbsp; ${totalPagesNumber}
+        </td>
+
+        <td align="right">
+            
+            <c:if test="${currentPageNumber > 1}">
+                <input type="button" onclick="window.location.href='${pageContext.request.contextPath}/admin/users/${currentPageNumber-1}'"
+                       value="<s:message code="word.previous"/>"/>&nbsp;&nbsp;
+            </c:if>
+
+            <c:if test="${currentPageNumber < totalPagesNumber}">
+                <input type="button" onclick="window.location.href='${pageContext.request.contextPath}/admin/users/${currentPageNumber+1}'"
+                       value="<s:message code="word.next"/>"/>&nbsp;&nbsp;
+            </c:if>
+        </td>
+    </tr>
+</table>
+</div>
 </body>
 </html>

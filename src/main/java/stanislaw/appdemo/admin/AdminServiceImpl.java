@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import stanislaw.appdemo.user.User;
 
-import java.util.List;
-
 @Service("adminService")
 @Transactional
 public class AdminServiceImpl implements AdminService {
@@ -19,8 +17,8 @@ public class AdminServiceImpl implements AdminService {
     private AdminRepository adminRepository;
 
     @Override
-    public List<User> findAll() {
-        List<User> usersList = adminRepository.findAll();
+    public Page<User> findAll(Pageable pageable) {
+        Page<User> usersList = adminRepository.findAll(pageable);
         return usersList;
     }
 }
