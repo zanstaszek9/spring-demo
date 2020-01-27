@@ -14,7 +14,8 @@
 </head>
 <body>
     <%@ include file="../../incl/menu.app"%>
-
     <h1><s:message code="menu.adminPage" /></h1>
+    <%@ include file="../../incl/menuadmin.app"%>
+
 </body>
 </html>

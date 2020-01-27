@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service("userService")
 @Transactional  // Allows transactions for data saving
@@ -54,5 +55,10 @@ public class UserServiceImpl implements UserService{
         userRepository.updateUserProfile(newName, newLastName, newEmail, id);
     }
 
+    @Override
+    public List<User> findAll() {
+        List<User> usersList = userRepository.findAll();
+        return usersList;
+    }
 
 }
