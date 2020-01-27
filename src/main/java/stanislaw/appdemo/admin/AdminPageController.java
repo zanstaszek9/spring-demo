@@ -15,7 +15,7 @@ import java.util.List;
 public class AdminPageController {
 
     @Autowired
-    private UserService userService;
+    private AdminService adminService;
 
     @GET
     @RequestMapping(value = "/admin")
@@ -34,7 +34,7 @@ public class AdminPageController {
     }
 
     private List<User> getAllUsers(){
-        List<User> usersList = userService.findAll();
+        List<User> usersList = adminService.findAll();
         for(User user:usersList){
             int nrRole = user.getRoles().iterator().next().getId();
             user.setNrRole(nrRole);

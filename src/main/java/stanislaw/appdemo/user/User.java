@@ -39,9 +39,6 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @Transient  // Ignored by Hibernate
-    private String operation;
-
     @Transient
     private int nrRole;
 
@@ -108,14 +105,6 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
     }
 
     public int getNrRole() {
