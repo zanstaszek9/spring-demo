@@ -63,11 +63,11 @@
 <table width="1000" border="0" cellpadding="6" cellspacing="0">
     <tr>
         <td align="left">
-            <s:message code="word.page"/>&nbsp;${currentPageNumber}&#32;<s:message code="word.of"/>&nbsp; ${totalPagesNumber}
+            <s:message code="word.page"/>&nbsp;${currentPageNumber}&#32;<s:message code="word.of"/>&nbsp;${totalPagesNumber}
         </td>
 
         <td align="right">
-            
+
             <c:if test="${currentPageNumber > 1}">
                 <input type="button" onclick="window.location.href='${pageContext.request.contextPath}/admin/users/${currentPageNumber-1}'"
                        value="<s:message code="word.previous"/>"/>&nbsp;&nbsp;
