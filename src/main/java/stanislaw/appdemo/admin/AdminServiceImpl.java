@@ -11,6 +11,7 @@ import stanislaw.appdemo.user.User;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service("adminService")
@@ -40,4 +41,10 @@ public class AdminServiceImpl implements AdminService {
         adminRepository.updateUserBesidesPasswordAndRoles(user);
     }
 
+    @Override
+    public List<User> findAllSearch(String param) {
+        List<User> userList = adminRepository.findAllSearch(param);
+        return userList;
+        //return adminRepository.findAllSearch(param);
+    }
 }

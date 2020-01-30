@@ -52,14 +52,28 @@ public class AdminPageController {
         // URL page will start with 1 which is more convenient for humans,
         // so 1 needs to be subtracted
         Page<User> usersPage = getAllUsersPageable(page-1);
+        List<User> usersList = usersPage.getContent();
+
         final int totalPagesNumber = usersPage.getTotalPages();
         int currentPageNumber = usersPage.getNumber();
-        List<User> usersList = usersPage.getContent();
+
         model.addAttribute("totalPagesNumber", totalPagesNumber);
         model.addAttribute("currentPageNumber", currentPageNumber+1);   // Adding 1 because indexing differences
         model.addAttribute("usersList", usersList);
         model.addAttribute("recordCounterStart", currentPageNumber * NUMBER_OF_ROWS_PER_PAGE);
+
         return "admin/users";
+    }
+
+    @GET
+    @RequestMapping(value = "/admin/users/search/{searchString}")
+    @Secured(value = "ROLE_ADMIN")
+    public String showAdminSearchedUsersPage(@PathVariable("searchString") String searchString, Model model){
+        List<User> usersList = adminService.findAllSearch(searchString);
+        setUsersRole(usersList);
+
+        model.addAttribute("usersList", usersList);
+        return "admin/usersearch";
     }
 
 
@@ -87,16 +101,18 @@ public class AdminPageController {
         return "redirect:/admin/users/1";    // Redirect to land exactly on this URL instead of concating the address
     }
 
-
-
     private Page<User> getAllUsersPageable(int pageNumber){
         Page<User> usersPage = adminService.findAll(PageRequest.of(pageNumber, NUMBER_OF_ROWS_PER_PAGE));
-        for(User user: usersPage){
+        setUsersRole(usersPage);
+        return usersPage;
+    }
+
+
+    public void setUsersRole(Iterable<User> users){
+        for(User user : users){
             int nrRole = user.getRoles().iterator().next().getId();
             user.setNrRole(nrRole);
         }
-
-        return usersPage;
     }
 
     private Map<Integer, String> prepareRoleMap(){

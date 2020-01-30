@@ -13,12 +13,31 @@
 <html>
 <head>
     <title><s:message code="menu.users"/></title>
+    <script>
+        function startSearch() {
+            let searchString = document.getElementById('searchString').value;
+
+            if(searchString.length < 3){
+                document.getElementById('errorSearch').innerHTML = "<s:message code="error.searchString.toShort"/>";
+                return false;
+            }
+            else{
+                document.getElementById('errorSearch').innerHTML= "";
+                let searchLink = '${pageContext.request.contextPath}/admin/users/search/'+searchString;
+                window.location.href=searchLink;
+            }
+        }
+    </script>
 </head>
 <body>
 <%@include file="../../incl/menu.app" %>
 <h1><s:message code="menu.users"/></h1>
 <c:set var="recordCounter" value="${recordCounterStart}" scope="page"/>
 <div>
+    <div align="right" style="width: 1000px; padding: 2px";>
+        <input type="text" id="searchString"/>&nbsp;&nbsp;<input type="button" value="<s:message code="button.search"/>" onclick="startSearch();"/><br/>
+        <span id="errorSearch" style="color:red;"></span>
+    </div>
     <!-- TODO: CSS from https://jsfiddle.net/zanstaszek9/14mawcey/ -->
 <table width="1000" border="0" cellpadding="6" cellspacing="0">
     <tr>
