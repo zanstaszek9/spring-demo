@@ -16,7 +16,7 @@
     <title><s:message code="menu.register"/></title>
 </head>
 <body>
-<%@include file="../incl/menu.app" %> <%-- Including Menu code --%>
+<%@include file="../incl/menu.jsp" %> <%-- Including Menu code TODO: Testing .jsp menu file. Erase if works!--%>
 <h2><s:message code="menu.register"/></h2>
 
 <p align="center">
