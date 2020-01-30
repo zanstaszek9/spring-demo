@@ -19,6 +19,7 @@
 <h1><s:message code="menu.users"/></h1>
 <c:set var="recordCounter" value="${recordCounterStart}" scope="page"/>
 <div>
+    <!-- TODO: CSS from https://jsfiddle.net/zanstaszek9/14mawcey/ -->
 <table width="1000" border="0" cellpadding="6" cellspacing="0">
     <tr>
         <td width="35" align="center"></td>
@@ -32,12 +33,12 @@
     <c:forEach var="u" items="${usersList }">
         <c:set var="recordCounter" value="${recordCounter+1}"/>
     <tr>
-        <td><c:out value="${recordCounter}"/></td>
-        <td><c:out value="${u.id }" /></td>
-        <td><c:out value="${u.name }" /></td>
-        <td><c:out value="${u.lastName }" /></td>
-        <td><c:out value="${u.email }" /></td>
-        <td>
+        <td><a href = "edit/${u.id}"><c:out value="${recordCounter}"/></a></td>
+        <td><a href = "edit/${u.id}"><c:out value="${u.id }" /></a></td>
+        <td><a href = "edit/${u.id}"><c:out value="${u.name }" /></a></td>
+        <td><a href = "edit/${u.id}"><c:out value="${u.lastName }" /></a></td>
+        <td><a href = "edit/${u.id}"><c:out value="${u.email }" /></a></td>
+        <td><a href = "edit/${u.id}">
             <c:choose>
                 <c:when test="${u.active == 1 }">
                     <font color="green"><s:message code="word.yes"/></font>
@@ -46,7 +47,7 @@
                     <font color="red"><s:message code="word.no"/></font>
                 </c:otherwise>
             </c:choose>
-        </td>
+        </a></td>
         <td>
             <c:choose>
                 <c:when test="${u.nrRole == 1 }">

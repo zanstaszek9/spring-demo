@@ -28,7 +28,7 @@
             <tr>
                 <td colspan="2" align="center">
                     <c:if test="${not empty param.error}">  <!--    If param.error will not be empty, display the message below -->
-                        <font color="red"><s:message code="error.login"/></font>
+                        <font color="red"><s:message code="error.login"/></font>    <!--TODO: Make message of inactive account-->
                     </c:if>
                 </td>
             </tr>

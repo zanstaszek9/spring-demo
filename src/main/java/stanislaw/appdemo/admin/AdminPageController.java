@@ -1,17 +1,24 @@
 package stanislaw.appdemo.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import stanislaw.appdemo.user.User;
+import stanislaw.appdemo.validators.EditUserProfileValidator;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 @Controller
 public class AdminPageController {
@@ -21,11 +28,21 @@ public class AdminPageController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @GET
     @RequestMapping(value = "/admin")
     @Secured(value = {"ROLE_ADMIN"})
     public String showAdminMainPage(Model model){
         return "admin/admin";
+    }
+
+    @GET
+    @RequestMapping(value={"/admin/users/","/admin/users"})
+    @Secured(value = {"ROLE_ADMIN"})
+    public String showAdminAllUsersPage(Model model){
+        return "redirect:/admin/users/1";
     }
 
     @GET
@@ -46,6 +63,32 @@ public class AdminPageController {
     }
 
 
+    @GET
+    @RequestMapping(value="/admin/users/edit/{id}")
+    @Secured(value = {"ROLE_ADMIN"})
+    public String showAdminUserToEdit(@PathVariable("id") int id, Model model){
+        User user = adminService.findUserById(id);
+        int role = user.getRoles().iterator().next().getId();
+        user.setNrRole(role);
+
+        Map<Integer, String> roleMap = prepareRoleMap();
+        Map<Integer, String> activityMap = prepareActivityMap();
+
+        model.addAttribute("roleMap", roleMap);
+        model.addAttribute("activityMap", activityMap);
+        model.addAttribute("user", user);
+        return "admin/useredit";
+    }
+
+    @POST
+    @RequestMapping(value = "/admin/users/update/{id}")
+    public String updateUser(@PathVariable("id") int id, User user){
+        adminService.updateUser(user);
+        return "redirect:/admin/users/1";    // Redirect to land exactly on this URL instead of concating the address
+    }
+
+
+
     private Page<User> getAllUsersPageable(int pageNumber){
         Page<User> usersPage = adminService.findAll(PageRequest.of(pageNumber, NUMBER_OF_ROWS_PER_PAGE));
         for(User user: usersPage){
@@ -54,6 +97,22 @@ public class AdminPageController {
         }
 
         return usersPage;
+    }
+
+    private Map<Integer, String> prepareRoleMap(){
+        Locale locale = Locale.getDefault();
+        Map<Integer, String> roleMap = new HashMap<Integer, String>();
+        roleMap.put(1, messageSource.getMessage("word.admin", null, locale));
+        roleMap.put(2, messageSource.getMessage("word.user", null, locale));
+        return roleMap;
+    }
+
+    private Map<Integer, String> prepareActivityMap(){
+        Locale locale = Locale.getDefault();
+        Map<Integer, String> activityMap = new HashMap<Integer, String>();
+        activityMap.put(0, messageSource.getMessage("word.no", null, locale));
+        activityMap.put(1, messageSource.getMessage("word.yes", null, locale));
+        return activityMap;
     }
 
 }
