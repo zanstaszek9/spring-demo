@@ -18,3 +18,4 @@
         </li>
     </ol>
 </nav>
+<%@include file="menuadmin.jsp"%>

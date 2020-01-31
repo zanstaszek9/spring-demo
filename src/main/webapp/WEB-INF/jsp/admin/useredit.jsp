@@ -5,7 +5,9 @@
   Time: 00:05
   To change this template use File | Settings | File Templates.
 --%>
-<%@ include file="../../incl/menuadmin.app"%>
+<%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+
+<%@ include file="../../incl/head.jsp"%>
 <title><s:message code="admin.user.edit"/></title></title> <!-- TODO: Needs resolving! It must be include in <head>. Maybe using Thymeleaf?-->
 
     <h2><s:message code="admin.user.edit"/></h2>
@@ -13,7 +15,7 @@
         <c:out value="${message }" />
     </p>
     <sf:form id="usersForm" action="${pageContext.request.contextPath}/admin/users/update/${user.id}" modelAttribute="user"
-             enctype="multipart/form-data" method="POST"><!--TODO:Button for password resetting-->
+             enctype="multipart/form-data" method="POST"><!--TODO:Make button for password resetting-->
         <sf:hidden path="id" value="${user.id}"/>
         <table width="500" border="0" cellpadding="4" cellspacing="1" align="center">
             <tr>

@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ include file="../../incl/head.jsp"%>
-<%@ include file="../../incl/menuadmin.app"%>
 <title><s:message code="menu.adminPage"/></title> <!-- TODO: Needs resolving! It must be include in <head>. Maybe using Thymeleaf?-->
 
 
