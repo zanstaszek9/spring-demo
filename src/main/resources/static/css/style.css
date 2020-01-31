@@ -62,13 +62,13 @@ table.data td a {
 
 button, input[type=submit], input[type=button] {
     background-color: transparent;
-    border: 1px solid #D71E2D;
+    border: 1px solid #0097C9;
     border-radius: 25px;
     -webkit-transition: all .05s ease-in-out;
     transition: all .15s ease-in-out;
-    color: #D71E2D;
+    color: #0097C9;
 }
 button:hover, input[type=submit]:hover, input[type=button]:hover {
-    box-shadow: 0 0 10px 0 #D71E2D inset, 0 0 5px -5px #D71E2D inset;
-    border: 1px solid #D71E2D;
+    box-shadow: 0 0 10px 0 #0097C9 inset, 0 0 5px -5px #0097C9 inset;
+    border: 1px solid #0097C9;
 }
