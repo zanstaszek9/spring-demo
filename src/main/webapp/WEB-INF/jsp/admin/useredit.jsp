@@ -5,17 +5,9 @@
   Time: 00:05
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="s"  uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-<head>
-    <title><s:message code="admin.user.edit"/></title>
-</head>
-<body>
-    <%@include file="../../incl/menu.app" %>
+<%@ include file="../../incl/menuadmin.app"%>
+<title><s:message code="admin.user.edit"/></title></title> <!-- TODO: Needs resolving! It must be include in <head>. Maybe using Thymeleaf?-->
+
     <h2><s:message code="admin.user.edit"/></h2>
     <p align="center">
         <c:out value="${message }" />
@@ -68,5 +60,5 @@
             </tr>
         </table>
     </sf:form>
-</body>
-</html>
+
+    <%@include file="../../incl/footer.jsp" %>

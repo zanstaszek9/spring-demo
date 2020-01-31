@@ -25,7 +25,9 @@ public class RegisterController {
     @RequestMapping(value = "/register")
     public String registerForm(Model model){
         User u = new User();
+        String title = "";
         model.addAttribute("user", u);  // Takes modelAttribute from jsp page
+        model.addAttribute("title", "<s:message code=\"menu.register\"/>");
         return "register";
     }
 

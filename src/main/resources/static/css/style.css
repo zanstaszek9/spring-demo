@@ -1,0 +1,74 @@
+/*
+https://coolors.co/0097c9-f7c34b-d71e2d-009b60-fcfafa
+*/
+html, body {
+    font-family: 'Lato', sans-serif;
+    height: 100%;
+    margin: 0;
+}
+nav.tableMenuBg{
+    width: 100%;
+    display: inline-block;
+    background-color: #0097c9;
+}
+
+.tableMenuBg ol {
+    list-style-type: none;
+    padding-left: 10px;
+}
+.tableMenuBg {
+    display: inline-block;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    margin: 10px;
+    flex: 1 0 auto;
+}
+
+.footer {
+    text-align: center;
+    flex-shrink: 0;
+    border-top: 3px solid #0097C9;
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+}
+
+.searchButton, .data, .navigationButtons {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
+table.data {
+    border-collapse: collapse;
+    align-content: center;
+    border: 1px solid #FFEBCD;
+}
+table.data tr.label{
+    background: #f5cda2;
+}
+table.data tr:hover:not(.label) {
+    background: #f8EFD5;
+}
+
+table.data td a {
+    display: block;
+    padding: 8px;
+}
+
+button, input[type=submit], input[type=button] {
+    background-color: transparent;
+    border: 1px solid #D71E2D;
+    border-radius: 25px;
+    -webkit-transition: all .05s ease-in-out;
+    transition: all .15s ease-in-out;
+    color: #D71E2D;
+}
+button:hover, input[type=submit]:hover, input[type=button]:hover {
+    box-shadow: 0 0 10px 0 #D71E2D inset, 0 0 5px -5px #D71E2D inset;
+    border: 1px solid #D71E2D;
+}

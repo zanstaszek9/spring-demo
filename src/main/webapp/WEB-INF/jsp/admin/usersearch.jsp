@@ -101,6 +101,5 @@
         </tr>
     </table>
 </div>
-</body>
-</html>
+<%@include file="../../incl/footer.jsp" %>
 
