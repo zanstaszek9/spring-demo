@@ -1,5 +1,7 @@
 package stanislaw.appdemo.admin;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -24,8 +26,6 @@ public interface AdminRepository extends JpaRepository<User, Integer> {
     void updateUserBesidesPasswordAndRoles(@Param("user") User user );
 
     @Query(value = "SELECT * FROM User u WHERE u.name LIKE %:param% OR u.last_name LIKE %:param% OR u.email LIKE %:param%", nativeQuery = true)
-    //@Query(value = "SELECT * FROM User u WHERE u.name LIKE %:param% OR u.last_name LIKE %:param% OR email LIKE %:param%", nativeQuery = true)
-    //@Query(value = "SELECT u FROM User u WHERE u.name LIKE %:param% OR u.lastName LIKE %:param% OR u.email LIKE %:param%")
+    Page<User> findAllSearch(@Param("param") String param, Pageable pageable);
 
-    List<User> findAllSearch(@Param("param") String param);
 }

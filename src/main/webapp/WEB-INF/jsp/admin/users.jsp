@@ -19,7 +19,7 @@
         }
         else{
             document.getElementById('errorSearch').innerHTML= "";
-            let searchLink = '${pageContext.request.contextPath}/admin/users/search/'+searchString;
+            let searchLink = '${pageContext.request.contextPath}/admin/users/1?search='+searchString;
             window.location.href=searchLink;
         }
     }
@@ -32,8 +32,6 @@
         <input type="text" id="searchString"/>&nbsp;&nbsp;<input type="button" value="<s:message code="button.search"/>" onclick="startSearch();"/><br/>
         <span id="errorSearch" style="color:red;"></span>
     </div>
-    <!-- TODO: CSS from https://jsfiddle.net/zanstaszek9/14mawcey/ -->
-    <!-- TODO: Check JS! -->
 <table class ="data"  width="1000" cellpadding="6" cellspacing="0">
     <tr class = label>
         <td width="35" align="center"></td>
@@ -84,12 +82,12 @@
         <td align="right">
 
             <c:if test="${currentPageNumber > 1}">
-                <input type="button" onclick="window.location.href='${pageContext.request.contextPath}/admin/users/${currentPageNumber-1}'"
+                <input type="button" onclick="window.location.href='${pageContext.request.contextPath}/admin/users/${currentPageNumber-1}${searchParam}'"
                        value="<s:message code="word.previous"/>"/>&nbsp;&nbsp;
             </c:if>
 
             <c:if test="${currentPageNumber < totalPagesNumber}">
-                <input type="button" onclick="window.location.href='${pageContext.request.contextPath}/admin/users/${currentPageNumber+1}'"
+                <input type="button" onclick="window.location.href='${pageContext.request.contextPath}/admin/users/${currentPageNumber+1}${searchParam}'"
                        value="<s:message code="word.next"/>"/>&nbsp;&nbsp;
             </c:if>
         </td>

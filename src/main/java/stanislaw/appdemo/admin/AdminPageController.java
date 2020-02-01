@@ -8,9 +8,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import stanislaw.appdemo.user.User;
 import stanislaw.appdemo.utilities.UserUtilities;
@@ -32,6 +30,7 @@ import java.util.Map;
 public class AdminPageController {
 
     final static int NUMBER_OF_ROWS_PER_PAGE = 3;
+    final static int MIN_SEARCH_LENGTH = 3;
 
     @Autowired
     private AdminService adminService;
@@ -56,10 +55,8 @@ public class AdminPageController {
     @GET
     @RequestMapping(value="/admin/users/{page}")
     @Secured(value = {"ROLE_ADMIN"})
-    public String showAdminAllUsersPage(@PathVariable("page") int page, Model model){
-        // URL page will start with 1 which is more convenient for humans,
-        // so 1 needs to be subtracted
-        Page<User> usersPage = getAllUsersPageable(page-1);
+    public String showAdminAllUsersPage(@PathVariable("page") int page, @RequestParam(required = false, defaultValue = "") String search, Model model){
+        Page<User> usersPage = getUsersPageable(page, search);
         List<User> usersList = usersPage.getContent();
 
         final int totalPagesNumber = usersPage.getTotalPages();
@@ -69,19 +66,24 @@ public class AdminPageController {
         model.addAttribute("currentPageNumber", currentPageNumber+1);   // Adding 1 because indexing differences
         model.addAttribute("usersList", usersList);
         model.addAttribute("recordCounterStart", currentPageNumber * NUMBER_OF_ROWS_PER_PAGE);
+        model.addAttribute("searchParam", search.isEmpty()? search : "?search="+search);
 
         return "admin/users";
     }
 
-    @GET
-    @RequestMapping(value = "/admin/users/search/{searchString}")
-    @Secured(value = "ROLE_ADMIN")
-    public String showAdminSearchedUsersPage(@PathVariable("searchString") String searchString, Model model){
-        List<User> usersList = adminService.findAllSearch(searchString);
-        setUsersRole(usersList);
+    private Page<User> getUsersPageable(int pageNumber, String search){
+        // URL page will start with 1 which is more convenient for humans,
+        // so 1 needs to be subtracted
+        --pageNumber;
+        Page<User> usersPage;
 
-        model.addAttribute("usersList", usersList);
-        return "admin/usersearch";
+        if(!search.isEmpty() && search.length() >= MIN_SEARCH_LENGTH)
+            usersPage = adminService.findAllSearch(search, PageRequest.of(pageNumber, NUMBER_OF_ROWS_PER_PAGE));
+        else
+            usersPage = adminService.findAll(PageRequest.of(pageNumber, NUMBER_OF_ROWS_PER_PAGE));
+
+        setUsersRole(usersPage);
+        return usersPage;
     }
 
 
@@ -110,11 +112,8 @@ public class AdminPageController {
         return "redirect:/admin/users/1";    // Redirect to land exactly on this URL instead of concating the address
     }
 
-    private Page<User> getAllUsersPageable(int pageNumber){
-        Page<User> usersPage = adminService.findAll(PageRequest.of(pageNumber, NUMBER_OF_ROWS_PER_PAGE));
-        setUsersRole(usersPage);
-        return usersPage;
-    }
+
+
 
     @GET
     @RequestMapping(value="/admin/users/importusers")
@@ -172,5 +171,4 @@ public class AdminPageController {
         activityMap.put(1, messageSource.getMessage("word.yes", null, locale));
         return activityMap;
     }
-
 }

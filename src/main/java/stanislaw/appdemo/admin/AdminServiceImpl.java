@@ -29,6 +29,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Page<User> findAllSearch(String param, Pageable pageable) {
+        Page<User> userList = adminRepository.findAllSearch(param, pageable);
+        return userList;
+    }
+
+    @Override
     public User findUserById(int id) {
         User user = adminRepository.getUserById(id);
         return user;
@@ -39,12 +45,5 @@ public class AdminServiceImpl implements AdminService {
     public void updateUser(User user) {
         adminRepository.updateUserRole(user.getNrRole(), user.getId());
         adminRepository.updateUserBesidesPasswordAndRoles(user);
-    }
-
-    @Override
-    public List<User> findAllSearch(String param) {
-        List<User> userList = adminRepository.findAllSearch(param);
-        return userList;
-        //return adminRepository.findAllSearch(param);
     }
 }
