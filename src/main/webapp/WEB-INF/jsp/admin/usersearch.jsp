@@ -1,46 +1,41 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Stasio
-  Date: 30.01.2020
-  Time: 19:41
+  User: StanislawZan
+  Date: 27-Jan-20
+  Time: 12:32 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-<head>
-    <title><s:message code="menu.users"/></title>
-    <script>
-        function startSearch() {
-            let searchWord = document.getElementById('searchString').value;
+<%@include file="../../incl/head.jsp" %>
+<title><s:message code="menu.users"/></title><!-- TODO: Needs resolving! It must be include in <head>. Maybe using Thymeleaf?-->
 
-            if(searchWord.length < 3){
-                document.getElementById('errorSearch').innerHTML= "<s:message code="error.searchString.toShort"/>";
-                return false;
-            }
-            else{
-                document.getElementById('errorSearch').innerHTML= "";
-                let searchLink = '${pageContext.request.contextPath}/admin/users/search/'+searchWord;
-                window.location.href=searchLink;
-            }
+
+<script>
+    function startSearch() {
+        let searchString = document.getElementById('searchString').value;
+
+        if(searchString.length < 3){
+            document.getElementById('errorSearch').innerHTML = "<s:message code="error.searchString.toShort"/>";
+            return false;
         }
-    </script>
-</head>
-<body>
-<%@include file="../../incl/menu.app" %>
+        else{
+            document.getElementById('errorSearch').innerHTML= "";
+            let searchLink = '${pageContext.request.contextPath}/admin/users/search/'+searchString;
+            window.location.href=searchLink;
+        }
+    }
+</script>
+
 <h1><s:message code="menu.users"/></h1>
 <c:set var="recordCounter" value="${recordCounterStart}" scope="page"/>
 <div>
-    <div align="right" style="width: 1000px; padding: 2px";>
+    <div class = "searchButton" align="right" style="width: 1000px; padding: 2px";>
         <input type="text" id="searchString"/>&nbsp;&nbsp;<input type="button" value="<s:message code="button.search"/>" onclick="startSearch();"/><br/>
         <span id="errorSearch" style="color:red;"></span>
     </div>
     <!-- TODO: CSS from https://jsfiddle.net/zanstaszek9/14mawcey/ -->
-    <table width="1000" border="0" cellpadding="6" cellspacing="0">
-        <tr>
+    <!-- TODO: Check JS! -->
+    <table class ="data"  width="1000" cellpadding="6" cellspacing="0">
+        <tr class = label>
             <td width="35" align="center"></td>
             <td width="35" align="center"><s:message code="admin.user.id"/></td>
             <td width="200" align="center"><s:message code="register.name"/></td>
@@ -80,7 +75,7 @@
             </tr>
         </c:forEach>
     </table>
-    <table width="1000" border="0" cellpadding="6" cellspacing="0">
+    <table class = "navigationButtons" width="1000" border="0" cellpadding="6" cellspacing="0">
         <tr>
             <td align="left">
                 <s:message code="word.page"/>&nbsp;${currentPageNumber}&#32;<s:message code="word.of"/>&nbsp;${totalPagesNumber}
@@ -101,5 +96,7 @@
         </tr>
     </table>
 </div>
+
+
 <%@include file="../../incl/footer.jsp" %>
 

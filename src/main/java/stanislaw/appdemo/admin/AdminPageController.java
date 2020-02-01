@@ -10,11 +10,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import stanislaw.appdemo.user.User;
+import stanislaw.appdemo.utilities.UserUtilities;
 import stanislaw.appdemo.validators.EditUserProfileValidator;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -96,6 +104,7 @@ public class AdminPageController {
 
     @POST
     @RequestMapping(value = "/admin/users/update/{id}")
+    @Secured(value = {"ROLE_ADMIN"})
     public String updateUser(@PathVariable("id") int id, User user){
         adminService.updateUser(user);
         return "redirect:/admin/users/1";    // Redirect to land exactly on this URL instead of concating the address
@@ -107,6 +116,39 @@ public class AdminPageController {
         return usersPage;
     }
 
+    @GET
+    @RequestMapping(value="/admin/users/importusers")
+    @Secured(value = {"ROLE_ADMIN"})
+    public String showAdminUploadUsersPageFromXML(Model model){
+        return "/admin/importusers";
+    }
+
+    @POST
+    @RequestMapping(value = "/admin/users/upload")
+    @Secured(value = "ROLE_ADMIN")
+    public String importUsersFromXML(@RequestParam("filename") MultipartFile mFile){
+        try {
+            uploadFileToServer(mFile);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return "redirect:/admin/users/1";
+    }
+
+    private void uploadFileToServer(MultipartFile mFile) throws IOException {
+        String uploadDir = System.getProperty("user.dir") + "/uploads";
+        createOrFindUploadDirectory(uploadDir);
+
+        Path fileAndPath = Paths.get(uploadDir, mFile.getOriginalFilename());
+        Files.write(fileAndPath, mFile.getBytes());
+    }
+
+    private void createOrFindUploadDirectory(String uploadDir) {
+        File file = new File(uploadDir);
+        if(!file.exists())
+            file.mkdir();
+    }
 
     public void setUsersRole(Iterable<User> users){
         for(User user : users){
