@@ -1,5 +1,7 @@
 package stanislaw.appdemo.admin;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -8,15 +10,13 @@ import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import stanislaw.appdemo.mainController.MainPageController;
 import stanislaw.appdemo.user.Role;
 import stanislaw.appdemo.user.RoleRepository;
 import stanislaw.appdemo.user.User;
 
 import javax.persistence.EntityManager;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service("adminService")
 @Transactional
@@ -27,6 +27,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainPageController.class);
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -63,15 +65,21 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void insertInBatch(List<User> usersList) {
         EntityManager entityManager = jpaContext.getEntityManagerByManagedType(User.class);
-        setUsersRoleAndEncodePasswords(usersList);  // TODO: Interestingly, does not work now for more than 50. Need to put the content of that function into the for loop. I'll try to find out why.
+        setUsersRoleAndEncodePasswords(usersList);
 
-        for(int i = 0; i < usersList.size(); i++){
-            User user = usersList.get(i);
+        Iterator<User> i = usersList.iterator();
+        int counter = 0;
+        while(i.hasNext()) {
+            counter++;
+            User user = i.next();
             entityManager.persist(user);
-            if(i % 50 == 0 && i > 0){
+            i.remove();
+
+            if(counter % 50 == 0 && counter > 0){
                 entityManager.flush();
                 entityManager.clear();
-                System.out.println("****\t Loaded " + i + " records from " + usersList.size() + "\t****");
+                setUsersRoleAndEncodePasswords(usersList);
+                System.out.println("****\t Loaded " + counter + " records from " + usersList.size() + "\t****");
             }
         }
     }
