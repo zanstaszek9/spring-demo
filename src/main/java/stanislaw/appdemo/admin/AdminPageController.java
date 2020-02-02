@@ -126,21 +126,28 @@ public class AdminPageController {
     @RequestMapping(value = "/admin/users/upload")
     @Secured(value = "ROLE_ADMIN")
     public String importUsersFromXML(@RequestParam("filename") MultipartFile mFile){
+        List<User> usersList;
         try {
-            uploadFileToServer(mFile);
+            File file = uploadAndGetFile(mFile);
+            usersList = UserUtilities.userDataLoader(file);
+            adminService.insertInBatch(usersList);
+            file.delete();
         }
         catch (Exception e){
             e.printStackTrace();
         }
+
         return "redirect:/admin/users/1";
     }
 
-    private void uploadFileToServer(MultipartFile mFile) throws IOException {
+    private File uploadAndGetFile(MultipartFile mFile) throws IOException {
         String uploadDir = System.getProperty("user.dir") + "/uploads";
         createOrFindUploadDirectory(uploadDir);
 
         Path fileAndPath = Paths.get(uploadDir, mFile.getOriginalFilename());
         Files.write(fileAndPath, mFile.getBytes());
+
+        return new File(fileAndPath.toString());
     }
 
     private void createOrFindUploadDirectory(String uploadDir) {
