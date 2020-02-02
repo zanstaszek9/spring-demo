@@ -1,5 +1,7 @@
 package stanislaw.appdemo.admin;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
@@ -10,10 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import stanislaw.appdemo.mainController.MainPageController;
 import stanislaw.appdemo.user.User;
 import stanislaw.appdemo.utilities.UserUtilities;
 import stanislaw.appdemo.validators.EditUserProfileValidator;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import java.io.File;
@@ -29,8 +33,9 @@ import java.util.Map;
 @Controller
 public class AdminPageController {
 
-    final static int NUMBER_OF_ROWS_PER_PAGE = 3;
+    final static int NUMBER_OF_ROWS_PER_PAGE = 10;
     final static int MIN_SEARCH_LENGTH = 3;
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainPageController.class);
 
     @Autowired
     private AdminService adminService;
@@ -139,6 +144,18 @@ public class AdminPageController {
 
         return "redirect:/admin/users/1";
     }
+
+    @DELETE
+    @RequestMapping(value="/admin/users/delete/{id}")
+    @Secured(value = {"ROLE_ADMIN"})
+    public String deleteUser(@PathVariable("id") int id, Model model){
+        LOGGER.debug("[CALLED\t>>>\tAdminPageController.deleteUser\t>\tPARAMETER: " +id+"]");
+        adminService.deleteUserById(id);
+        return "redirect:/admin/users/1";
+    }
+
+
+
 
     private File uploadAndGetFile(MultipartFile mFile) throws IOException {
         String uploadDir = System.getProperty("user.dir") + "/uploads";

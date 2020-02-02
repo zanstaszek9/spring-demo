@@ -36,11 +36,12 @@
     <tr class = label>
         <td width="35" align="center"></td>
         <td width="35" align="center"><s:message code="admin.user.id"/></td>
-        <td width="200" align="center"><s:message code="register.name"/></td>
-        <td width="200" align="center"><s:message code="register.lastName"/></td>
-        <td width="220" align="center"><s:message code="register.email"/></td>
+        <td width="190" align="center"><s:message code="register.name"/></td>
+        <td width="190" align="center"><s:message code="register.lastName"/></td>
+        <td width="210" align="center"><s:message code="register.email"/></td>
         <td width="60" align="center"><s:message code="profile.isActive"/></td>
         <td width="100" align="center"><s:message code="profile.role"/></td>
+        <td width="50"></td>
     </tr>
     <c:forEach var="u" items="${usersList }">
         <c:set var="recordCounter" value="${recordCounter+1}"/>
@@ -70,6 +71,19 @@
                 </c:otherwise>
             </c:choose>
         </td>
+        <td>
+            <c:choose>
+                <c:when test="${u.nrRole == 1 }">
+                    <a><img src="/resources/images/remove-cant-icon.png" width="16" height="16"/></a>
+                </c:when>
+                <c:otherwise>
+                    <a href="delete/${u.id}">
+                        <img src="/resources/images/remove-icon.png" width="16" height="16" title="<s:message code="word.delete"/>"/>
+                    </a>
+                </c:otherwise>
+            </c:choose>
+        </td>
+
     </tr>
     </c:forEach>
 </table>

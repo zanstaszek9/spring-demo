@@ -84,6 +84,16 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+
+    @Override
+    public void deleteUserById(int id) {
+        LOGGER.debug("[CALLED\t>>>\tAdminServiceImpl.deleteUserByID\t>\tPARAMETER: " +id+"]");
+        LOGGER.debug("[CALLED\t>>>\tAdminRepository.deleteUserFromUserRole\t>\tPARAMETER: " +id+"]");
+        adminRepository.deleteUserFromUserRole(id);
+        LOGGER.debug("[CALLED\t>>>\tAdminRepository.deleteUserFromUser\t>\tPARAMETER: " +id+"]");
+        adminRepository.deleteUserFromUser(id);
+    }
+
     private void setUsersRoleAndEncodePasswords(List<User> usersList){
         for (User user : usersList){
             Role role = roleRepository.findByRole("ROLE_USER");
