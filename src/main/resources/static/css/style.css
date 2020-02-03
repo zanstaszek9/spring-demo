@@ -1,29 +1,49 @@
 /*
 https://coolors.co/0097c9-f7c34b-d71e2d-009b60-fcfafa
 */
-html, body {
+html,
+body {
     font-family: 'Lato', sans-serif;
     height: 100%;
     margin: 0;
 }
-nav.tableMenuBg{
+
+nav {
     width: 100%;
-    display: inline-block;
+    padding: 1px 0;
+}
+
+li a {
+    text-decoration: none;
+}
+
+
+nav.tableMenuBg {
     background-color: #0097c9;
 }
+.tableMenuBg a {
+    color: #191923;
+}
 
-nav.tableMenuAdmin{
-    width: 100%;
-    display: inline-block;
+nav.tableMenuAdmin {
     background-color: #f7c34b;
 }
+.tableMenuAdmin a {
+    color: #393E41;
+}
 
-.tableMenuBg ol, .tableMenuAdmin ol {
+.tableMenuBg ol,
+.tableMenuAdmin ol {
     list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
     padding-left: 10px;
 }
-.tableMenuBg, .tableMenuAdmin {
-    display: inline-block;
+
+.liright {
+    margin-left: auto;
+    padding-right: 10px;
 }
 
 body {
@@ -40,7 +60,7 @@ body {
     flex-shrink: 0;
     border-top: 3px solid #0097C9;
     width: 100%;
-    padding: 5px 10px 5px 10px;
+    padding: 3px 0;
 }
 
 .searchButton, .data, .navigationButtons {

@@ -19,6 +19,6 @@
     <!--<script type="text/javascript" src="/script/script.js"></script>-->
 </head>
 <body>
-<%@include file="../incl/menu.jsp" %> <%-- Including Menu code TODO: Testing .jsp menu file. Erase if works!--%>
+<%@include file="../incl/menu.jsp" %> <%-- Including Menu code --%>
     <div class="content">
 
