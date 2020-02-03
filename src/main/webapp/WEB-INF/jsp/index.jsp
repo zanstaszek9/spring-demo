@@ -9,4 +9,6 @@
     <title><s:message code="menu.mainPage"/></title><!-- TODO: Needs resolving! It must be include in <head>. Maybe using Thymeleaf?-->
 
 <h1>This is main page</h1>
+<h3><c:out value="${message}"/></h3>
+
 <%@include file="../incl/footer.jsp" %>
