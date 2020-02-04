@@ -1,21 +1,24 @@
 package stanislaw.appdemo.admin;
 
+import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import stanislaw.appdemo.mainController.MainPageController;
 import stanislaw.appdemo.user.User;
 import stanislaw.appdemo.utilities.UserUtilities;
-import stanislaw.appdemo.validators.EditUserProfileValidator;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -37,11 +40,16 @@ public class AdminPageController {
     final static int MIN_SEARCH_LENGTH = 3;
     private static final Logger LOGGER = LoggerFactory.getLogger(MainPageController.class);
 
+    private final static String DB_MICROSERVICE_URL = "http://localhost:8300//rest/db";
+
     @Autowired
     private AdminService adminService;
 
     @Autowired
     private MessageSource messageSource;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     @GET
     @RequestMapping(value = "/admin")
@@ -135,7 +143,9 @@ public class AdminPageController {
         try {
             File file = uploadAndGetFile(mFile);
             usersList = UserUtilities.userDataLoader(file);
-            adminService.insertInBatch(usersList);
+            //adminService.insertInBatch(usersList);
+            prepareAndSendJson(usersList);
+
             file.delete();
         }
         catch (Exception e){
@@ -143,6 +153,21 @@ public class AdminPageController {
         }
 
         return "redirect:/admin/users/1";
+    }
+
+    private void prepareAndSendJson(Object input){
+        String json = new GsonBuilder()
+                .setPrettyPrinting()
+                .disableHtmlEscaping()
+                .create().toJson(input);
+        System.out.println(input);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity request = new HttpEntity(json, headers);
+
+        restTemplate.postForObject(DB_MICROSERVICE_URL + "/addallusers", request, String.class);
     }
 
     @DELETE
