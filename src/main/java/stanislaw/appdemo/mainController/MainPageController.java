@@ -10,12 +10,12 @@ import javax.ws.rs.GET;
 @Controller
 public class MainPageController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MainPageController.class);
+    //private static final Logger LOGGER = LoggerFactory.getLogger(MainPageController.class);
 
     @GET
     @RequestMapping(value = {"/", "/index"})
     public String showMainPage(){
-        LOGGER.debug("****\t CALLED > showMainPage()\t****");
+        //LOGGER.debug("****\t CALLED > showMainPage()\t****");
         return "index";
     }
 

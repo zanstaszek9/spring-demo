@@ -1,7 +1,6 @@
 package stanislaw.appdemo.admin;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -10,7 +9,6 @@ import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import stanislaw.appdemo.mainController.MainPageController;
 import stanislaw.appdemo.user.Role;
 import stanislaw.appdemo.user.RoleRepository;
 import stanislaw.appdemo.user.User;
@@ -28,7 +26,7 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private RoleRepository roleRepository;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MainPageController.class);
+    //private static final Logger LOGGER = LoggerFactory.getLogger(MainPageController.class);
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -41,6 +39,17 @@ public class AdminServiceImpl implements AdminService {
     public Page<User> findAll(Pageable pageable) {
         Page<User> usersList = adminRepository.findAll(pageable);
         return usersList;
+    }
+
+    @Override
+    public String findAllJson() {
+        List <User> usersList = adminRepository.findAll();
+        String json = new GsonBuilder()
+                .setPrettyPrinting()
+                .disableHtmlEscaping()
+                .create()
+                .toJson(usersList);
+        return json;
     }
 
     @Override
@@ -87,10 +96,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteUserById(int id) {
-        LOGGER.debug("[CALLED\t>>>\tAdminServiceImpl.deleteUserByID\t>\tPARAMETER: " +id+"]");
-        LOGGER.debug("[CALLED\t>>>\tAdminRepository.deleteUserFromUserRole\t>\tPARAMETER: " +id+"]");
+        //LOGGER.debug("[CALLED\t>>>\tAdminServiceImpl.deleteUserByID\t>\tPARAMETER: " +id+"]");
+        //LOGGER.debug("[CALLED\t>>>\tAdminRepository.deleteUserFromUserRole\t>\tPARAMETER: " +id+"]");
         adminRepository.deleteUserFromUserRole(id);
-        LOGGER.debug("[CALLED\t>>>\tAdminRepository.deleteUserFromUser\t>\tPARAMETER: " +id+"]");
+        //LOGGER.debug("[CALLED\t>>>\tAdminRepository.deleteUserFromUser\t>\tPARAMETER: " +id+"]");
         adminRepository.deleteUserFromUser(id);
     }
 

@@ -59,4 +59,5 @@ public class UserServiceImpl implements UserService{
     public void updateUserActivation(int activation, String activationCode) {
         userRepository.updateActivation(activation, activationCode);
     }
+
 }

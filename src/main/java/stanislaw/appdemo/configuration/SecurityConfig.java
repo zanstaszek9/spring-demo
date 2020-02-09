@@ -55,8 +55,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register").permitAll()
                 .antMatchers("/adduser").permitAll()
                 .antMatchers("/activatelink/**").permitAll()
+                .antMatchers("/admin/charts/**").permitAll()    //TODO: Temp for testing purposes
         //		.antMatchers("/admin").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
+        //        .anyRequest().anonymous()
                 .and().csrf().disable()
                 .formLogin()
                 .loginPage("/login")

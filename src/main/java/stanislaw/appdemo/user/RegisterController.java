@@ -32,9 +32,9 @@ public class RegisterController {
     @RequestMapping(value = "/register")
     public String registerForm(Model model){
         User u = new User();
-        String title = "";
+        String title = "<s:message code=\"menu.register\"/>";
         model.addAttribute("user", u);  // Takes modelAttribute from jsp page
-        model.addAttribute("title", "<s:message code=\"menu.register\"/>");
+        model.addAttribute("title", title);
         return "register";
     }
 
@@ -50,13 +50,13 @@ public class RegisterController {
         new UserRegisterValidator().validateEmailExist(userExist, result);
 
         if (!(result.hasErrors())){
+            /*
             user.setActivationCode(AppdemoUtils.authorizationStringGenerator());
-
             String emailContent = (messageSource.getMessage("register.clickConfirmation", null, locale))+"\n" +
                     "http://localhost:8080/activatelink/"+user.getActivationCode();
-
+             */
             userService.saveUser(user);
-            emailSender.sendEmail(user.getEmail(), messageSource.getMessage("email.subject.registerConfirmation",null, locale), emailContent);
+            //emailSender.sendEmail(user.getEmail(), messageSource.getMessage("email.subject.registerConfirmation",null, locale), emailContent);
             model.addAttribute("message", messageSource.getMessage("user.register.success.email", null, locale));
 
             //model.addAttribute("user", new User());
