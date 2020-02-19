@@ -30,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class RegisterControllerTest {
 
+
     @Autowired
     private WebApplicationContext wac;
 
@@ -65,7 +66,7 @@ class RegisterControllerTest {
      * */
 
     @Test
-    void show_register_page_by_url() throws Exception {
+    void itShouldAccessRegisterPageByUrl() throws Exception {
         // Should confirm if page loads correctly and pass
         // I'm not sure if it tests what is supposed
         this.mockMvc.perform(get("/register")).andDo(print())
@@ -74,7 +75,7 @@ class RegisterControllerTest {
     }
 
     @Test
-    void show_register_page_model_title() throws Exception {
+    void itShouldHaveTitleRegister () throws Exception {
         // Should confirm if the page's title equals the title form locale file and pass
         // Test fails
         this.mockMvc.perform(get("/register")).andDo(print())
@@ -85,7 +86,7 @@ class RegisterControllerTest {
 
 
     @Test
-    void show_register_action_empty_error() throws Exception {
+    void itShouldSendEmptyUserAndGetError() throws Exception {
         // Should send the user with empty attributes a return errors,
         // as validation prevents the empty email and password
         // Test fails.
@@ -98,7 +99,7 @@ class RegisterControllerTest {
     }
 
     @Test
-    void show_register_action_invalid_email() throws Exception {
+    void itShouldSendInvalidUserEmailAndGetError() throws Exception {
         // Should send the user with valid attributes and invalid email
         // returning error from validation
         // Test fails
@@ -112,7 +113,7 @@ class RegisterControllerTest {
     }
 
     @Test
-    void show_register_action_valid() throws Exception {
+    void itShouldSendValidUserEmail() throws Exception {
         // Should send the user with valid attributes and pass
         // Test passes, although not tested if user has been added to database.
         User user = prepareUserValid();

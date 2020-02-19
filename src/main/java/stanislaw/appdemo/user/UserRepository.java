@@ -27,5 +27,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {  // Integ
     @Query("UPDATE User u SET u.active = :active WHERE u.activationCode= :activationCode")
     void updateActivation(@Param("active") int active, @Param("activationCode") String activationCode);
 
+
 }
 // Interface will tell Hibernate to create SQL query of: 'SELECT * FROM user WHERE user.email = ?"
