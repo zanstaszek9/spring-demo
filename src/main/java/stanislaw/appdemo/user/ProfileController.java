@@ -39,7 +39,6 @@ public class ProfileController   {
         return "profile";
     }
 
-
     @GET
     @RequestMapping(value = "/editpassword")
     public String editUserPassword(Model model){

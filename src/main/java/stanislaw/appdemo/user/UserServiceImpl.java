@@ -55,9 +55,11 @@ public class UserServiceImpl implements UserService{
         userRepository.updateUserProfile(newName, newLastName, newEmail, id);
     }
 
+    /*
     @Override
     public void updateUserActivation(int activation, String activationCode) {
         userRepository.updateActivation(activation, activationCode);
     }
+    */
 
 }

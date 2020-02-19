@@ -48,7 +48,6 @@
                 <td colspan="2" align="center" bgcolor="#ffffff"><input
                         type="submit" value="<s:message code="button.login"/>" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"/></td>
             </tr>
-
         </table>
     </form>
 <%@include file="../incl/footer.jsp" %>

@@ -15,5 +15,4 @@ public interface AdminService {
     Page<User> findAllSearch(String param, Pageable pageable);
     void insertInBatch(List<User> usersList);
     void deleteUserById(int id);
-
 }

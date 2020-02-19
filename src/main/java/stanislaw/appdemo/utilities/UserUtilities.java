@@ -78,5 +78,4 @@ public class UserUtilities {
         user.setNrRole(Integer.valueOf(e.getElementsByTagName("nrroli").item(0).getTextContent()));
     }
 
-
 }

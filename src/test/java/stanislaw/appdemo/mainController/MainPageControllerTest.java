@@ -19,7 +19,7 @@ class MainPageControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void show_main_page_url_empty() throws Exception {
+    void itShouldRedirectToEntryPageUsingEmptyURL() throws Exception {
         this.mockMvc.perform(get("/")).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("")))
@@ -27,7 +27,7 @@ class MainPageControllerTest {
     }
 
     @Test
-    void show_main_page_url_index() throws Exception {
+    void itShouldRedirectToEntryPageUsingIndexURL() throws Exception {
         this.mockMvc.perform(get("/index")).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("")))
@@ -35,13 +35,10 @@ class MainPageControllerTest {
     }
 
     @Test
-    void show_main_page_wrong_url() throws Exception {
+    void itShouldRedirectToErrorPageUsingIncorrectURL() throws Exception {
         this.mockMvc.perform(get("/asdasdas")).andDo(print())
-                .andExpect(status().is(404));
-        ;
+                .andExpect(status().is(404));        ;
     }
-
-
 
 
 }

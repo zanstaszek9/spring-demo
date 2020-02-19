@@ -13,3 +13,4 @@ public class LoginPageController {
         return "login";
     }
 }
+

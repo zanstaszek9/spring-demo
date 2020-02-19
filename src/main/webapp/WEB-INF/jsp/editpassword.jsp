@@ -9,7 +9,6 @@
 <%@include file="../incl/head.jsp" %>
     <title><s:message code="button.passwordChange"/></title><!-- TODO: Needs resolving! It must be include in <head>. Maybe using Thymeleaf?-->
 
-
     <h2><s:message code="button.passwordChange"/></h2>
 
     <p align="center">

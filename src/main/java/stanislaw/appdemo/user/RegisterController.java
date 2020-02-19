@@ -66,6 +66,8 @@ public class RegisterController {
         return returnPage;
     }
 
+
+    /*
     @POST
     @RequestMapping(value = "/activatelink/{activationCode}")
     public String activationAccount(@PathVariable("activationCode") String activationCode, Model model, Locale locale) {
@@ -73,5 +75,5 @@ public class RegisterController {
         model.addAttribute("message", messageSource.getMessage("user.register.success",null, locale));
         return "index";
     }
-
+*/
 }

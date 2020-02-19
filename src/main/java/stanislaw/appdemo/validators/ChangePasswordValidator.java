@@ -37,5 +37,4 @@ public class ChangePasswordValidator implements Validator {
         if(!(new BCryptPasswordEncoder().matches(oldPassword, encodedPassword)))
             errors.rejectValue("oldPassword", "error.oldPasswordNotMatch");
     }
-
 }
