@@ -30,3 +30,6 @@ build/
 ### VS Code ###
 .vscode/
 /lib/javax.ws.rs-api-2.1.1.jar
+
+
+.logs

@@ -9,6 +9,7 @@ import stanislaw.appdemo.utilities.AppdemoUtils;
 
 public class UserRegisterValidator implements Validator {
 
+
     @Override
     public boolean supports(Class <?> cls){
         return User.class.equals(cls);
