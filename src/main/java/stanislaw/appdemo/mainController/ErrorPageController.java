@@ -19,4 +19,5 @@ public class ErrorPageController implements ErrorController {
     public String showErrorPage(){
         return "error";
     }
+
 }

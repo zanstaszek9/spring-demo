@@ -137,4 +137,5 @@ public class User {
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
     }
+
 }

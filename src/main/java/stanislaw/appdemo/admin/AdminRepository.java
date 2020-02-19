@@ -36,3 +36,4 @@ public interface AdminRepository extends JpaRepository<User, Integer> {
     @Query(value = "DELETE FROM user WHERE user_id = :id", nativeQuery = true)
     void deleteUserFromUser(@Param("id") int id);
 }
+

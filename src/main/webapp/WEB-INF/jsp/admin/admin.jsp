@@ -11,5 +11,4 @@
 
 <h1><s:message code="menu.adminPage" /></h1>
 
-
 <%@include file="../../incl/footer.jsp" %>

@@ -16,6 +16,5 @@
     <input type="submit" value="<s:message code="button.upload"/>"/>
 </sf:form>
 
-
 <%@include file="../../incl/footer.jsp" %>
 

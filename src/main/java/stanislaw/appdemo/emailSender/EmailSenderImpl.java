@@ -26,6 +26,7 @@ public class EmailSenderImpl implements EmailSender {
         javaMailSender.send(mail);
     }
 
+
     private MimeMessage prepareEmail(String to, String subject, String content) throws MessagingException {
         MimeMessage mail = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(mail, true);

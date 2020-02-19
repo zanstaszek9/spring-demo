@@ -28,6 +28,5 @@ public class EditUserProfileValidator implements Validator {
             if(!isMatch)
                 errors.rejectValue("email", "error.userEmailIsNotMatch");
         }
-
     }
 }

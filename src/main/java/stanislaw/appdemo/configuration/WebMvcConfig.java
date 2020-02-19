@@ -25,4 +25,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
         factory.setMaxRequestSize(DataSize.parse("5MB"));
         return factory.createMultipartConfig();
     }
+
 }

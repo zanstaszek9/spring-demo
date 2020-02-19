@@ -10,7 +10,6 @@
 <%@include file="../incl/head.jsp" %>
     <title><s:message code="menu.profileEdit"/></title><!-- TODO: Needs resolving! It must be include in <head>. Maybe using Thymeleaf?-->
 
-
 <h2 align="center"><s:message code="menu.profileEdit"/></h2>
 
 <sf:form id="usersForm" action="updateprofile" modelAttribute="user"

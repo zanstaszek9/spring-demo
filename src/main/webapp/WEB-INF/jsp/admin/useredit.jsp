@@ -42,7 +42,6 @@
             <tr>
                 <td colspan="2" align="center"><font color="red"><sf:errors path="email"/></font></td>
             </tr>
-
             <tr>
                 <td width="130" align="right" ><s:message code="profile.role"/></td>
                 <td width="270" align="left"><sf:select path="nrRole" items="${roleMap}"/></td>

@@ -8,7 +8,6 @@
 <%@include file="../incl/head.jsp" %>
     <title><s:message code="menu.profileEdit"/></title><!-- TODO: Needs resolving! It must be include in <head>. Maybe using Thymeleaf?-->
 
-
 <p align="center">
     <font face="sans-serif" size="5">
         <c:out value="${message }" />

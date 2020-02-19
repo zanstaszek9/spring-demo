@@ -14,5 +14,4 @@ public class FileUpload {
     private void setFilename(MultipartFile filename){
         this.filename = filename;
     }
-
 }

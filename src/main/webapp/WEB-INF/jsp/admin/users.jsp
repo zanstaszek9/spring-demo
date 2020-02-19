@@ -83,7 +83,6 @@
                 </c:otherwise>
             </c:choose>
         </td>
-
     </tr>
     </c:forEach>
 </table>

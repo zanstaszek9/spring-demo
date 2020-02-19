@@ -8,7 +8,6 @@
 <%@include file="../incl/head.jsp" %>
     <title><s:message code="error.errorPage"/></title><!-- TODO: Needs resolving! It must be include in <head>. Maybe using Thymeleaf?-->
 
-
 <img src="/resources/images/errorimage.png">
 <h2><s:message code="error.defaultErrorMessage"/></h2>
 

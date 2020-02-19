@@ -11,7 +11,6 @@ import javax.ws.rs.GET;
 public class MainPageController {
 
     //private static final Logger LOGGER = LoggerFactory.getLogger(MainPageController.class);
-
     @GET
     @RequestMapping(value = {"/", "/index"})
     public String showMainPage(){

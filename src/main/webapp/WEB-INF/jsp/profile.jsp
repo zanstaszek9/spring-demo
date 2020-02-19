@@ -70,7 +70,6 @@
                 </c:choose>
             </td>
         </tr>
-
     </table>
 
     <table width="500" border="0" cellpadding="4" cellspacing="1" align="center">

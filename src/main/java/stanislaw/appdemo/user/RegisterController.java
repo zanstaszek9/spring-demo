@@ -66,6 +66,7 @@ public class RegisterController {
         return returnPage;
     }
 
+
     /*
     @POST
     @RequestMapping(value = "/activatelink/{activationCode}")
